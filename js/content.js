@@ -43,38 +43,51 @@ async function createReminderDialog() {
     const dialog = document.createElement('div');
     dialog.className = 'focus-reminder';
     dialog.innerHTML = `
+        <div class="close-button">×</div>
         <h2>Mindful Moment</h2>
         <p>Are you spending your time intentionally?</p>
         <div class="focus-reminder-buttons">
-            <button class="continue">Continue Browsing</button>
+            <button class="continue">Browsing with Timer</button>
             <button class="leave">Focus on What Matters</button>
         </div>
     `;
 
-    // Add button events with fade out animation
-    dialog.querySelector('.continue').addEventListener('click', () => {
-        dialog.style.opacity = '0';
-        dialog.style.transform = 'translate(-50%, -50%) scale(0.95)';
-        setTimeout(() => dialog.remove(), 200);
+    // Create timer element
+    const timer = document.createElement('div');
+    timer.className = 'browsing-timer';
+    timer.style.display = 'none';
+    document.body.appendChild(timer);
+
+    let seconds = 0;
+    let timerInterval;
+
+    const startTimer = () => {
+        dialog.remove();
+        timer.style.display = 'block';
+        timer.textContent = '0s';
+        timerInterval = setInterval(() => {
+            seconds++;
+            timer.textContent = `${seconds}s`;
+        }, 1000);
+    };
+
+    // Add button events 
+    dialog.querySelector('.close-button').addEventListener('click', () => {
+        dialog.remove();
     });
+    
+    dialog.querySelector('.continue').addEventListener('click', startTimer);
 
     dialog.querySelector('.leave').addEventListener('click', () => {
-        dialog.style.opacity = '0';
-        dialog.style.transform = 'translate(-50%, -50%) scale(0.95)';
-        setTimeout(() => {
-            chrome.runtime.sendMessage({ action: 'closeTab' });
-        }, 200);
+        if (timerInterval) {
+            clearInterval(timerInterval);
+            timer.remove();
+        }
+        chrome.runtime.sendMessage({ action: 'closeTab' });
     });
 
-    // Add to page with fade in animation
-    dialog.style.opacity = '0';
-    dialog.style.transition = 'all 0.2s ease';
+    // Add to page 
     document.body.appendChild(dialog);
-    
-    // Trigger fade in
-    setTimeout(() => {
-        dialog.style.opacity = '1';
-    }, 50);
 }
 
 // Initialize reminder

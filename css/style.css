@@ -95,3 +95,37 @@
 .focus-reminder .leave:hover {
   background-color: #3a3a3c !important;
 }
+
+.focus-reminder .close-button {
+  position: absolute !important;
+  top: 10px !important;
+  right: 10px !important;
+  cursor: pointer !important;
+  color: #888 !important;
+  font-size: 20px !important;
+  padding: 5px 10px !important;
+  transition: color 0.2s ease !important;
+}
+
+.focus-reminder .close-button:hover {
+  color: #666 !important;
+}
+
+.browsing-timer {
+  position: fixed !important;
+  top: 50% !important;
+  right: 30px !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  padding: 12px 20px !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  z-index: 2147483647 !important;
+  font-weight: 700 !important;
+  color: #ff0000 !important;
+  font-family: "Inter", -apple-system, monospace !important;
+  font-size: 24px !important;
+  letter-spacing: -0.02em !important;
+  border: 2px solid rgba(255, 0, 0, 0.1) !important;
+  min-width: 100px !important;
+  text-align: center !important;
+}
