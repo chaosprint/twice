@@ -18,6 +18,14 @@ h2 {
   color: #fff;
 }
 
+h3 {
+  font-size: 12px;
+  font-weight: 500;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.01em;
+  color: #999;
+}
+
 .site-list {
   margin: 0;
   padding: 0;
