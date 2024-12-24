@@ -62,7 +62,7 @@ async function createReminderDialog() {
         dialog.style.opacity = '0';
         dialog.style.transform = 'translate(-50%, -50%) scale(0.95)';
         setTimeout(() => {
-            window.location.href = 'about:blank';
+            chrome.runtime.sendMessage({ action: 'closeTab' });
         }, 200);
     });
 
