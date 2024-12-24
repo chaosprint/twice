@@ -113,8 +113,8 @@
 
 .browsing-timer {
   position: fixed !important;
-  top: 50% !important;
-  right: 30px !important;
+  top: 40% !important;
+  left: 40% !important;
   background: rgba(255, 255, 255, 0.95) !important;
   padding: 12px 20px !important;
   border-radius: 8px !important;
