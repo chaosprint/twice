@@ -1,6 +1,12 @@
-# Twice Chrome Extension
+# Twice - Think Twice Before Social Media
 
-A Chrome extension for Twice, helping you manage your tabs more efficiently.
+A Chrome extension that helps you be more mindful of your social media usage by prompting you to think twice before visiting social media sites. It's designed to reduce mindless scrolling and promote intentional browsing habits.
+
+## Features
+
+- Displays a gentle reminder when you attempt to visit social media sites
+- Helps you pause and reflect on whether you really need to check social media
+- Promotes mindful internet usage and better digital habits
 
 ## Installation
 
@@ -12,6 +18,13 @@ A Chrome extension for Twice, helping you manage your tabs more efficiently.
 
 The extension icon should now appear in your Chrome toolbar.
 
+## How It Works
+
+When you try to visit a social media site, Twice will show a popup asking you to pause and reflect. This small interruption helps you:
+- Be more conscious of your browsing habits
+- Reduce impulsive social media checking
+- Make intentional decisions about your online time
+
 ## Development
 
 The extension consists of:
@@ -21,12 +34,6 @@ The extension consists of:
 - `js/`: JavaScript functionality
 
 To make changes, simply edit the files and reload the extension in Chrome by clicking the refresh icon on the extension card in `chrome://extensions/`.
-
-## Usage
-
-Click the extension icon in your Chrome toolbar to open the popup interface. From there, you can:
-- View and manage your tabs
-- Use the extension's features to improve your browsing experience
 
 ## License
 
