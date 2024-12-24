@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "Twice",
+  "version": "1.0",
+  "description": "Reminds you to stay focused when visiting social media sites",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs",
+    "scripting"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["js/content.js"],
+      "css": ["css/style.css"]
+    }
+  ]
+}
