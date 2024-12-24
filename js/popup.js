@@ -43,12 +43,25 @@ async function renderSiteList() {
     const li = document.createElement('li');
     li.className = 'site-item';
     li.innerHTML = `
-      ${site.domain}
-      <label class="toggle">
-        <input type="checkbox" ${site.enabled ? 'checked' : ''}>
-        <span class="slider"></span>
-      </label>
+      <button class="delete-btn" title="Delete site">x</button>
+      <span class="domain-text">${site.domain}</span>
+      <div class="controls">
+        <label class="toggle">
+          <input type="checkbox" ${site.enabled ? 'checked' : ''}>
+          <span class="slider"></span>
+        </label>
+      </div>
     `;
+
+    // Setup delete button handler
+    const deleteBtn = li.querySelector('.delete-btn');
+    deleteBtn.addEventListener('click', async () => {
+      const updatedSites = sites.filter(s => s.domain !== site.domain);
+      await chrome.storage.sync.set({ sites: updatedSites });
+      showStatus('Site removed');
+      renderSiteList(); // Refresh the list
+      setupAddButton(); // Refresh add button state
+    });
 
     const checkbox = li.querySelector('input');
     checkbox.addEventListener('change', async () => {

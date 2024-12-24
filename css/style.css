@@ -1,97 +1,97 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap");
 
 .focus-reminder {
-    all: initial !important;
-    position: fixed !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    background: rgba(28, 28, 30, 0.98) !important;
-    padding: 32px !important;
-    border-radius: 8px !important;
-    z-index: 2147483647 !important;
-    width: 480px !important;
-    text-align: center !important;
-    font-family: 'Inter', -apple-system, sans-serif !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    box-sizing: border-box !important;
+  all: initial !important;
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  background: rgba(28, 28, 30, 0.98) !important;
+  padding: 32px !important;
+  border-radius: 8px !important;
+  z-index: 2147483647 !important;
+  width: 480px !important;
+  text-align: center !important;
+  font-family: "Inter", -apple-system, sans-serif !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-sizing: border-box !important;
 }
 
 .focus-reminder * {
-    all: revert !important;
-    font-family: 'Inter', -apple-system, sans-serif !important;
-    box-sizing: border-box !important;
-    line-height: normal !important;
+  all: revert !important;
+  font-family: "Inter", -apple-system, sans-serif !important;
+  box-sizing: border-box !important;
+  line-height: normal !important;
 }
 
 .focus-reminder h2 {
-    all: revert !important;
-    margin: 0 0 20px 0 !important;
-    color: #ffffff !important;
-    font-size: 20px !important;
-    font-weight: 500 !important;
-    letter-spacing: -0.01em !important;
-    font-family: 'Inter', -apple-system, sans-serif !important;
-    line-height: 1.2 !important;
-    text-align: center !important;
+  all: revert !important;
+  margin: 0 0 20px 0 !important;
+  color: #ffffff !important;
+  font-size: 20px !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.01em !important;
+  font-family: "Inter", -apple-system, sans-serif !important;
+  line-height: 1.2 !important;
+  text-align: center !important;
 }
 
 .focus-reminder p {
-    all: revert !important;
-    color: #999 !important;
-    font-size: 14px !important;
-    line-height: 1.5 !important;
-    margin: 6px 0 !important;
-    font-weight: 300 !important;
-    font-family: 'Inter', -apple-system, sans-serif !important;
-    text-align: center !important;
+  all: revert !important;
+  color: #999 !important;
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+  margin: 6px 0 !important;
+  font-weight: 300 !important;
+  font-family: "Inter", -apple-system, sans-serif !important;
+  text-align: center !important;
 }
 
 .focus-reminder-buttons {
-    all: revert !important;
-    display: flex !important;
-    justify-content: center !important;
-    gap: 12px !important;
-    margin-top: 24px !important;
+  all: revert !important;
+  display: flex !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  margin-top: 24px !important;
 }
 
 .focus-reminder button {
-    all: revert !important;
-    display: inline-block !important;
-    padding: 8px 16px !important;
-    border: none !important;
-    border-radius: 4px !important;
-    cursor: pointer !important;
-    font-size: 13px !important;
-    font-family: 'Inter', -apple-system, sans-serif !important;
-    transition: all 0.2s ease !important;
-    font-weight: 400 !important;
-    letter-spacing: 0 !important;
-    text-decoration: none !important;
-    line-height: normal !important;
-    height: auto !important;
-    margin: 0 !important;
-    min-width: 0 !important;
-    min-height: 0 !important;
-    width: auto !important;
+  all: revert !important;
+  display: inline-block !important;
+  padding: 8px 16px !important;
+  border: none !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  font-size: 13px !important;
+  font-family: "Inter", -apple-system, sans-serif !important;
+  transition: all 0.2s ease !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+  text-decoration: none !important;
+  line-height: normal !important;
+  height: auto !important;
+  margin: 0 !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  width: auto !important;
 }
 
 .focus-reminder .continue {
-    background-color: transparent !important;
-    color: #999 !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  background-color: transparent !important;
+  color: #999 !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
 }
 
 .focus-reminder .continue:hover {
-    background-color: rgba(255, 255, 255, 0.1) !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
 }
 
 .focus-reminder .leave {
-    background-color: #2C2C2E !important;
-    color: white !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  background-color: #2c2c2e !important;
+  color: white !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
 }
 
 .focus-reminder .leave:hover {
-    background-color: #3A3A3C !important;
+  background-color: #3a3a3c !important;
 }
