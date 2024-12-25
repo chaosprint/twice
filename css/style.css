@@ -115,17 +115,15 @@
   position: fixed !important;
   top: 40% !important;
   left: 40% !important;
-  background: rgba(255, 255, 255, 0.95) !important;
+  background: #ff0000 !important;
   padding: 12px 20px !important;
   border-radius: 8px !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
   z-index: 2147483647 !important;
   font-weight: 700 !important;
-  color: #ff0000 !important;
+  color: #fff !important;
   font-family: "Inter", -apple-system, monospace !important;
   font-size: 24px !important;
   letter-spacing: -0.02em !important;
-  border: 2px solid rgba(255, 0, 0, 0.1) !important;
-  min-width: 100px !important;
   text-align: center !important;
 }
