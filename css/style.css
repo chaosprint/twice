@@ -10,9 +10,16 @@
   padding: 32px !important;
   border-radius: 8px !important;
   z-index: 2147483647 !important;
-  width: 480px !important;
+  min-width: 50vw !important;
+  /* width: 60vw !important; */
+  /* height: 60vh !important; */
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
   text-align: center !important;
   font-family: "Inter", -apple-system, sans-serif !important;
+
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
   box-sizing: border-box !important;
 }
@@ -26,10 +33,10 @@
 
 .focus-reminder h2 {
   all: revert !important;
-  margin: 0 0 20px 0 !important;
+  margin: 0 0 40px 0 !important;
   color: #ffffff !important;
-  font-size: 20px !important;
-  font-weight: 500 !important;
+  font-size: 36px !important;
+  font-weight: 700 !important;
   letter-spacing: -0.01em !important;
   font-family: "Inter", -apple-system, sans-serif !important;
   line-height: 1.2 !important;
@@ -39,10 +46,10 @@
 .focus-reminder p {
   all: revert !important;
   color: #999 !important;
-  font-size: 14px !important;
-  line-height: 1.5 !important;
-  margin: 6px 0 !important;
-  font-weight: 300 !important;
+  font-size: 50px !important;
+  line-height: 1.6 !important;
+  margin: 12px 0 !important;
+  font-weight: 700 !important;
   font-family: "Inter", -apple-system, sans-serif !important;
   text-align: center !important;
 }

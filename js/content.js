@@ -39,6 +39,29 @@ async function shouldShowReminder() {
     }
 }
 
+const reminderMessages = [
+    "Are you spending your time intentionally?",
+    "Is this the best use of your precious time?",
+    "Is this activity aligned with your goals?",
+    "Could you be doing something more meaningful?",
+    "Are you scrolling mindlessly right now?",
+    "Is this bringing value to your life?",
+    "What else could you accomplish right now?",
+    "Are you in control of your attention?",
+    "Is this worth your limited time on Earth?",
+    "Will you remember this scroll session tomorrow?",
+    "Is this moving you closer to your dreams?",
+    "Are these minutes well invested?",
+    "Could your future self thank you for this?",
+    "Is this feeding your mind or just killing time?",
+    "What's the opportunity cost of scrolling now?",
+    "Are you choosing this consciously?",
+    "Is this enhancing or distracting your life?",
+    "Would you advise others to spend time like this?",
+    "Is this the legacy you want to build?",
+    "Does this align with your life's purpose?"
+];
+
 async function createReminderDialog() {
     // Check if reminder already exists
     if (document.querySelector('.focus-reminder')) {
@@ -54,12 +77,12 @@ async function createReminderDialog() {
     }
 
     // Create reminder dialog
+    const randomMessage = reminderMessages[Math.floor(Math.random() * reminderMessages.length)];
     const dialog = document.createElement('div');
     dialog.className = 'focus-reminder';
     dialog.innerHTML = `
         <div class="close-button">×</div>
-        <h2>Mindful Moment</h2>
-        <p>Are you spending your time intentionally?</p>
+        <p>${randomMessage}</p>
         <div class="focus-reminder-buttons">
             <button class="continue">Browsing with Timer</button>
             <button class="leave">Focus on What Matters</button>
