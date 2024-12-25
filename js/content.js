@@ -3,25 +3,39 @@ async function shouldShowReminder() {
         const domain = window.location.hostname.replace('www.', '');
         const result = await chrome.storage.sync.get('sites');
         
-        // If no sites in storage, use default configuration (enabled)
+        // If no sites in storage, initialize with default sites
         if (!result.sites || result.sites.length === 0) {
-            console.log('No sites configured, showing reminder');
-            return true;
+            const defaultSites = [
+                'youtube.com',
+                'tiktok.com',
+                'twitter.com',
+                'x.com',
+                'instagram.com',
+                'facebook.com'
+            ];
+            const sites = defaultSites.map(domain => ({
+                domain,
+                enabled: true
+            }));
+            await chrome.storage.sync.set({ sites });
+            return defaultSites.includes(domain);
         }
 
         const sites = result.sites;
-        // Check if any configured site matches the current domain
-        const matchingSite = sites.find(site => 
-            domain.includes(site.domain) || site.domain.includes(domain)
-        );
+        // Check if any configured site exactly matches the current domain
+        const matchingSite = sites.find(site => {
+            const siteDomain = site.domain.replace('www.', '');
+            return domain === siteDomain;
+        });
 
         console.log('Current domain:', domain);
         console.log('Matching site:', matchingSite);
         
+        // Only show reminder if site is in the list and enabled
         return matchingSite ? matchingSite.enabled : false;
     } catch (error) {
         console.error('Error checking reminder status:', error);
-        return false;
+        return false;  // Default to not showing reminder on error
     }
 }
 
