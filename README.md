@@ -2,14 +2,14 @@
 
 A Chrome extension that helps you be more mindful of your social media usage by prompting you to think twice before visiting social media sites. It's designed to reduce mindless scrolling and promote intentional browsing habits.
 
-<img width="1624" alt="image" src="https://github.com/user-attachments/assets/fc0f0100-6d21-4ccb-ab13-3542a9357939" />
-
+![Xnip2024-12-27_23-09-06](https://github.com/user-attachments/assets/452f5fd8-32a0-4950-b8b3-9bc5029e581f)
 
 ## Features
 
-- Displays a gentle reminder when you attempt to visit social media sites
-- Helps you pause and reflect on whether you really need to check social media
-- Promotes mindful internet usage and better digital habits
+- Shows a gentle reminder when you try to visit social media sites.
+- If you can't resist, you can proceed with a timer.
+- Add any domains you want reminders for.
+- Easy to turn on/off or skip this time.
 
 ## Installation
 
