@@ -127,10 +127,55 @@ async function createReminderDialog() {
     document.body.appendChild(dialog);
 }
 
+// Track time spent on the site
+async function trackTimeSpent() {
+    const domain = window.location.hostname.replace('www.', '');
+    const result = await chrome.storage.sync.get(['sites', 'timeSpent']);
+    const sites = result.sites || [];
+    const timeSpent = result.timeSpent || {};
+
+    // Only track time if site is in the monitored list and enabled
+    const matchingSite = sites.find(site => {
+        const siteDomain = site.domain.replace('www.', '');
+        return domain === siteDomain && site.enabled;
+    });
+
+    if (matchingSite) {
+        // Update time spent (in seconds)
+        timeSpent[domain] = (timeSpent[domain] || 0) + 1;
+        await chrome.storage.sync.set({ timeSpent });
+    }
+}
+
+// Initialize time tracking
+let trackingInterval;
+async function initializeTimeTracking() {
+    const shouldTrack = await shouldShowReminder();
+    console.log('Should track time:', shouldTrack);
+    
+    if (shouldTrack) {
+        // Track time every second
+        trackingInterval = setInterval(trackTimeSpent, 1000);
+        
+        // Clear interval when page is hidden
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden && trackingInterval) {
+                clearInterval(trackingInterval);
+                trackingInterval = null;
+            } else if (!document.hidden && !trackingInterval && shouldTrack) {
+                trackingInterval = setInterval(trackTimeSpent, 1000);
+            }
+        });
+    }
+}
+
 // Initialize reminder
 function initializeReminder() {
-    console.log('Initializing reminder...');
-    createReminderDialog();
+    console.log('Initializing reminder and time tracking...');
+    // Start time tracking immediately
+    initializeTimeTracking();
+    // Show reminder after a delay
+    setTimeout(createReminderDialog, 2000);
 }
 
 // Listen for messages from popup
@@ -140,9 +185,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     }
 });
 
-// Show reminder when page loads
-if (document.readyState === 'complete') {
-    initializeReminder();
+// Start initialization when DOM is loaded
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeReminder);
 } else {
-    window.addEventListener('load', initializeReminder);
+    initializeReminder();
 }

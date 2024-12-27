@@ -171,6 +171,7 @@ input:checked + .slider:before {
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.1);
   padding: 4px;
+  gap: 4px;
 }
 
 .tab-button {
@@ -197,6 +198,27 @@ input:checked + .slider:before {
 
 .stats-content {
   color: #fff;
+}
+
+.stats-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+}
+
+.reset-button {
+  background: #ff3b30;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.reset-button:hover {
+  background: #ff2419;
 }
 
 .stats-item {

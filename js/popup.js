@@ -123,14 +123,27 @@ async function setupAddButton() {
   });
 }
 
-// Format time duration in a human-readable way
-function formatDuration(minutes) {
-  if (minutes < 60) {
-    return `${Math.round(minutes)} min`;
+// Format time duration in seconds
+function formatDuration(seconds) {
+  if (seconds < 60) {
+    return `${Math.round(seconds)}s`;
+  } else if (seconds < 3600) {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = Math.round(seconds % 60);
+    return `${minutes}m ${remainingSeconds}s`;
+  } else {
+    const hours = Math.floor(seconds / 3600);
+    const remainingMinutes = Math.floor((seconds % 3600) / 60);
+    const remainingSeconds = Math.round(seconds % 60);
+    return `${hours}h ${remainingMinutes}m ${remainingSeconds}s`;
   }
-  const hours = Math.floor(minutes / 60);
-  const remainingMinutes = Math.round(minutes % 60);
-  return `${hours}h ${remainingMinutes}m`;
+}
+
+// Reset time spent statistics
+async function resetStats() {
+  await chrome.storage.sync.set({ timeSpent: {} });
+  renderStats();
+  showStatus('Statistics reset successfully');
 }
 
 // Render statistics tab content
@@ -140,21 +153,31 @@ async function renderStats() {
   const sites = result.sites || [];
   const timeSpent = result.timeSpent || {};
 
-  statsContent.innerHTML = '';
+  statsContent.innerHTML = `
+    <div class="stats-header">
+      <button id="resetStats" class="reset-button">Reset Stats</button>
+    </div>
+  `;
   
   sites.filter(site => site.enabled).forEach(site => {
-    const minutes = timeSpent[site.domain] || 0;
+    const seconds = timeSpent[site.domain] || 0;
     const div = document.createElement('div');
     div.className = 'stats-item';
     div.innerHTML = `
       <span class="site-name">${site.domain}</span>
-      <span class="time-spent">${formatDuration(minutes)}</span>
+      <span class="time-spent">${formatDuration(seconds)}</span>
     `;
     statsContent.appendChild(div);
   });
 
   if (sites.filter(site => site.enabled).length === 0) {
-    statsContent.innerHTML = '<p>No monitored sites yet.</p>';
+    statsContent.innerHTML += '<p>No monitored sites yet.</p>';
+  }
+
+  // Add reset button event listener
+  const resetButton = document.getElementById('resetStats');
+  if (resetButton) {
+    resetButton.addEventListener('click', resetStats);
   }
 }
 
