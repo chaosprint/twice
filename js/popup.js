@@ -123,8 +123,69 @@ async function setupAddButton() {
   });
 }
 
+// Format time duration in a human-readable way
+function formatDuration(minutes) {
+  if (minutes < 60) {
+    return `${Math.round(minutes)} min`;
+  }
+  const hours = Math.floor(minutes / 60);
+  const remainingMinutes = Math.round(minutes % 60);
+  return `${hours}h ${remainingMinutes}m`;
+}
+
+// Render statistics tab content
+async function renderStats() {
+  const statsContent = document.getElementById('statsContent');
+  const result = await chrome.storage.sync.get(['sites', 'timeSpent']);
+  const sites = result.sites || [];
+  const timeSpent = result.timeSpent || {};
+
+  statsContent.innerHTML = '';
+  
+  sites.filter(site => site.enabled).forEach(site => {
+    const minutes = timeSpent[site.domain] || 0;
+    const div = document.createElement('div');
+    div.className = 'stats-item';
+    div.innerHTML = `
+      <span class="site-name">${site.domain}</span>
+      <span class="time-spent">${formatDuration(minutes)}</span>
+    `;
+    statsContent.appendChild(div);
+  });
+
+  if (sites.filter(site => site.enabled).length === 0) {
+    statsContent.innerHTML = '<p>No monitored sites yet.</p>';
+  }
+}
+
+// Handle tab switching
+function setupTabs() {
+  const tabs = document.querySelectorAll('.tab-button');
+  const contents = document.querySelectorAll('.tab-content');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      // Update active tab button
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      // Show corresponding content
+      const targetId = tab.dataset.tab + 'Tab';
+      contents.forEach(content => {
+        content.style.display = content.id === targetId ? 'block' : 'none';
+      });
+
+      // Update stats when switching to stats tab
+      if (tab.dataset.tab === 'stats') {
+        renderStats();
+      }
+    });
+  });
+}
+
 // Initialize popup
 document.addEventListener('DOMContentLoaded', () => {
   renderSiteList();
   setupAddButton();
+  setupTabs();
 });
