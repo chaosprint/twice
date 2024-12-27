@@ -123,8 +123,92 @@ async function setupAddButton() {
   });
 }
 
+// Format time duration in seconds
+function formatDuration(seconds) {
+  if (seconds < 60) {
+    return `${Math.round(seconds)}s`;
+  } else if (seconds < 3600) {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = Math.round(seconds % 60);
+    return `${minutes}m ${remainingSeconds}s`;
+  } else {
+    const hours = Math.floor(seconds / 3600);
+    const remainingMinutes = Math.floor((seconds % 3600) / 60);
+    const remainingSeconds = Math.round(seconds % 60);
+    return `${hours}h ${remainingMinutes}m ${remainingSeconds}s`;
+  }
+}
+
+// Reset time spent statistics
+async function resetStats() {
+  await chrome.storage.sync.set({ timeSpent: {} });
+  renderStats();
+  showStatus('Statistics reset successfully');
+}
+
+// Render statistics tab content
+async function renderStats() {
+  const statsContent = document.getElementById('statsContent');
+  const result = await chrome.storage.sync.get(['sites', 'timeSpent']);
+  const sites = result.sites || [];
+  const timeSpent = result.timeSpent || {};
+
+  statsContent.innerHTML = `
+    <div class="stats-header">
+      <button id="resetStats" class="reset-button">Reset Stats</button>
+    </div>
+  `;
+  
+  sites.filter(site => site.enabled).forEach(site => {
+    const seconds = timeSpent[site.domain] || 0;
+    const div = document.createElement('div');
+    div.className = 'stats-item';
+    div.innerHTML = `
+      <span class="site-name">${site.domain}</span>
+      <span class="time-spent">${formatDuration(seconds)}</span>
+    `;
+    statsContent.appendChild(div);
+  });
+
+  if (sites.filter(site => site.enabled).length === 0) {
+    statsContent.innerHTML += '<p>No monitored sites yet.</p>';
+  }
+
+  // Add reset button event listener
+  const resetButton = document.getElementById('resetStats');
+  if (resetButton) {
+    resetButton.addEventListener('click', resetStats);
+  }
+}
+
+// Handle tab switching
+function setupTabs() {
+  const tabs = document.querySelectorAll('.tab-button');
+  const contents = document.querySelectorAll('.tab-content');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      // Update active tab button
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      // Show corresponding content
+      const targetId = tab.dataset.tab + 'Tab';
+      contents.forEach(content => {
+        content.style.display = content.id === targetId ? 'block' : 'none';
+      });
+
+      // Update stats when switching to stats tab
+      if (tab.dataset.tab === 'stats') {
+        renderStats();
+      }
+    });
+  });
+}
+
 // Initialize popup
 document.addEventListener('DOMContentLoaded', () => {
   renderSiteList();
   setupAddButton();
+  setupTabs();
 });

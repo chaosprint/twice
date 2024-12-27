@@ -4,13 +4,25 @@
   <link rel="stylesheet" href="css/popup.css">
 </head>
 <body>
-  <h3>Think twich when visiting social media sites</h3>
-  <ul class="site-list" id="siteList"></ul>
-  
-  <div class="current-site">
-    <p>Current website:</p>
-    <button id="addButton" class="add-button">Add to Focus Reminder</button>
-    <div id="statusMessage" class="status-message"></div>
+  <div class="tab-container">
+    <button class="tab-button active" data-tab="monitor">Monitor</button>
+    <button class="tab-button" data-tab="stats">Statistics</button>
+  </div>
+
+  <div class="tab-content" id="monitorTab">
+    <h3>Think twice when visiting social media sites</h3>
+    <ul class="site-list" id="siteList"></ul>
+    
+    <div class="current-site">
+      <p>Current website:</p>
+      <button id="addButton" class="add-button">Add to Focus Reminder</button>
+      <div id="statusMessage" class="status-message"></div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="statsTab" style="display: none;">
+    <h3>Time Spent on Sites</h3>
+    <div id="statsContent" class="stats-content"></div>
   </div>
 
   <script src="js/popup.js"></script>
