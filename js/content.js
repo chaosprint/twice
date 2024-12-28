@@ -27,14 +27,10 @@ async function shouldShowReminder() {
             const siteDomain = site.domain.replace('www.', '');
             return domain === siteDomain;
         });
-
-        console.log('Current domain:', domain);
-        console.log('Matching site:', matchingSite);
         
         // Only show reminder if site is in the list and enabled
         return matchingSite ? matchingSite.enabled : false;
     } catch (error) {
-        console.error('Error checking reminder status:', error);
         return false;  // Default to not showing reminder on error
     }
 }
@@ -70,7 +66,6 @@ async function createReminderDialog() {
 
     // Check if reminder should be shown for this site
     const shouldShow = await shouldShowReminder();
-    console.log('Should show reminder:', shouldShow);
     
     if (!shouldShow) {
         return;
@@ -151,7 +146,6 @@ async function trackTimeSpent() {
 let trackingInterval;
 async function initializeTimeTracking() {
     const shouldTrack = await shouldShowReminder();
-    console.log('Should track time:', shouldTrack);
     
     if (shouldTrack) {
         // Track time every second
@@ -171,7 +165,6 @@ async function initializeTimeTracking() {
 
 // Initialize reminder
 function initializeReminder() {
-    console.log('Initializing reminder and time tracking...');
     // Start time tracking immediately
     initializeTimeTracking();
     // Show reminder after a delay
