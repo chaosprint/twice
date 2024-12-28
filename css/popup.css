@@ -30,6 +30,8 @@ h3 {
   margin: 0;
   padding: 0;
   list-style: none;
+  max-height: 200px;
+  overflow-y: auto;
 }
 
 .site-item {
@@ -37,8 +39,8 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 4px;
+  padding-right: 8px;
 }
 
 .site-item .domain-text {

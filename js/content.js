@@ -59,7 +59,7 @@ async function createReminderDialog() {
 
             <div id="timer-display" class="section" style="display: none;">
                 <p class="timer">Time remaining until you can continue</p>
-                <p class="countdown"><span id="countdown">10:00</span></p>
+                <p class="countdown"><span id="countdown">--:--</span></p>
             </div>
 
             <div class="focus-reminder-buttons">
