@@ -101,6 +101,18 @@
   text-align: center !important;
 }
 
+@keyframes breathing {
+  0% {
+    transform: scale(1) !important;
+  }
+  50% {
+    transform: scale(1.02) !important;
+  }
+  100% {
+    transform: scale(1) !important;
+  }
+}
+
 .focus-reminder .leave {
   background-color: #2563eb !important;
   color: white !important;
@@ -112,12 +124,14 @@
   cursor: pointer !important;
   transition: all 0.2s ease !important;
   margin-bottom: 8px !important;
+  animation: breathing 2s ease-in-out infinite !important;
 }
 
 .focus-reminder .leave:hover {
   background-color: #1d4ed8 !important;
-  transform: translateY(-1px) !important;
+  transform: translateY(-1px) scale(1.02) !important;
   box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2) !important;
+  animation: none !important;
 }
 
 .focus-reminder .button-hint {

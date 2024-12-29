@@ -48,7 +48,7 @@ async function createReminderDialog() {
             <p>Are you spending your time intentionally?</p>
             
             <div id="timer-selection" class="section">
-                <p class="section-title">How long would you like to wait?</p>
+                <p class="section-title">How about we schedule it?</p>
                 <div class="timer-options">
                     <button class="schedule" data-minutes="1">1 Min</button>
                     <button class="schedule" data-minutes="3">3 Min</button>
