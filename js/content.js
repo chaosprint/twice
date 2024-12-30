@@ -48,18 +48,16 @@ async function createReminderDialog() {
             <p>Are you spending your time intentionally?</p>
             
             <div id="timer-selection" class="section">
-                <p class="section-title">How about we schedule it?</p>
+                <p class="section-title">If necessary...</p>
+                <p class="section-subtitle">Look outside the window<br>and come back in a minute</p>
                 <div class="timer-options">
-                    <button class="schedule" data-minutes="1">1 Min</button>
-                    <button class="schedule" data-minutes="3">3 Min</button>
-                    <button class="schedule" data-minutes="5">5 Min</button>
-                    <button class="schedule" data-minutes="10">10 Min</button>
+                    <button class="schedule" data-minutes="1">Take a Break</button>
                 </div>
             </div>
 
             <div id="timer-display" class="section" style="display: none;">
                 <p class="timer">Time remaining until you can continue</p>
-                <p class="countdown"><span id="countdown">--:--</span></p>
+                <p class="countdown"><span id="countdown">01:00</span></p>
             </div>
 
             <div class="focus-reminder-buttons">
@@ -74,28 +72,25 @@ async function createReminderDialog() {
     const countdownElement = dialog.querySelector('#countdown');
     const timerSelection = dialog.querySelector('#timer-selection');
 
-    // Add button events for all schedule buttons
-    dialog.querySelectorAll('.schedule').forEach(button => {
-        button.addEventListener('click', () => {
-            const minutes = parseInt(button.dataset.minutes);
-            let timeLeft = minutes * 60; // convert to seconds
-            timerSelection.style.display = 'none';
-            timerDisplay.style.display = 'block';
+    // Add button events for schedule button
+    dialog.querySelector('.schedule').addEventListener('click', () => {
+        let timeLeft = 60; // 1 minute in seconds
+        timerSelection.style.display = 'none';
+        timerDisplay.style.display = 'block';
+        
+        countdownInterval = setInterval(() => {
+            timeLeft--;
+            const mins = Math.floor(timeLeft / 60);
+            const secs = timeLeft % 60;
+            countdownElement.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
             
-            countdownInterval = setInterval(() => {
-                timeLeft--;
-                const mins = Math.floor(timeLeft / 60);
-                const secs = timeLeft % 60;
-                countdownElement.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
-                
-                if (timeLeft <= 0) {
-                    clearInterval(countdownInterval);
-                    dialog.style.opacity = '0';
-                    dialog.style.transform = 'translate(-50%, -50%) scale(0.95)';
-                    setTimeout(() => dialog.remove(), 200);
-                }
-            }, 1000);
-        });
+            if (timeLeft <= 0) {
+                clearInterval(countdownInterval);
+                dialog.style.opacity = '0';
+                dialog.style.transform = 'translate(-50%, -50%) scale(0.95)';
+                setTimeout(() => dialog.remove(), 200);
+            }
+        }, 1000);
     });
 
     dialog.querySelector('.leave').addEventListener('click', () => {
