@@ -2,7 +2,8 @@
 
 A Chrome extension that helps you be more mindful of your social media usage by prompting you to think twice before visiting social media sites. It's designed to reduce mindless scrolling and promote intentional browsing habits.
 
-<img width="1624" alt="image" src="https://github.com/user-attachments/assets/d2fd5319-12ec-4190-94e4-e90e68061f10" />
+<img width="1580" alt="image" src="https://github.com/user-attachments/assets/cce55789-8ae5-4802-afe3-cbf6358de948" />
+
 
 
 ## Features
