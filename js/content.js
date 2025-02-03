@@ -68,6 +68,8 @@ async function createReminderDialog() {
     const timerSelection = dialog.querySelector('#timer-selection');
 
     dialog.querySelector('.schedule').addEventListener('click', () => {
+        if (countdownInterval) clearInterval(countdownInterval);
+
         let timeLeft = DELAY_TIME;
         timerSelection.style.display = 'none';
         timerDisplay.style.display = 'block';
