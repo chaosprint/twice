@@ -1,3 +1,5 @@
+const DELAY_TIME = 30
+
 async function shouldShowReminder() {
     try {
         const domain = window.location.hostname.replace('www.', '');
@@ -50,7 +52,7 @@ async function createReminderDialog() {
 
             <div id="timer-display" class="section" style="display: none;">
                 <p class="timer">Time remaining until you can continue</p>
-                <p class="countdown"><span id="countdown">01:00</span></p>
+                <p class="countdown"><span id="countdown">00:${DELAY_TIME}</span></p>
             </div>
 
             <div class="focus-reminder-buttons">
@@ -66,14 +68,14 @@ async function createReminderDialog() {
     const timerSelection = dialog.querySelector('#timer-selection');
 
     dialog.querySelector('.schedule').addEventListener('click', () => {
-        let timeLeft = 60;
+        let timeLeft = DELAY_TIME;
         timerSelection.style.display = 'none';
         timerDisplay.style.display = 'block';
         
         countdownInterval = setInterval(() => {
             timeLeft--;
-            const mins = Math.floor(timeLeft / 60);
-            const secs = timeLeft % 60;
+            const mins = Math.floor(timeLeft / DELAY_TIME);
+            const secs = timeLeft % DELAY_TIME;
             countdownElement.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
             
             if (timeLeft <= 0) {
